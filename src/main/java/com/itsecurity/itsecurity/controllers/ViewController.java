@@ -53,6 +53,7 @@ public class ViewController {
                             .userName(userName)
                             .password(password)
                     .build());
+            model.addAttribute("msg", "user created");
         }
         return "create.html";
     }
