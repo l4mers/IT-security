@@ -6,15 +6,16 @@
 </head>
 <body>
 <div class="registration">
-    <form action="/startlogin" method="post">
+    <form action="/login" method="post">
         <label for="name">Namn:</label><br>
         <input type="text" id="name" name="name" value=""><br>
         <label for="password">Password:</label><br>
-        <input type="text" id="password" name="" value=""><br><br>
-        <label for="password2">Password again:</label><br>
-        <input type="text" id="password2" name="" value=""><br><br>
-        <input type="submit" value="Registrera">
-        <p th:text="${msg}"></p>
+        <input type="password" id="password" name="" value=""><br><br>
+        <input type="submit" value="Login">
+        <p th:text="${msg}"></p><br><br>
+    </form>
+    <form action="/create" method="post">
+        <input type="submit" value="create">
     </form>
 </div>
 </body>

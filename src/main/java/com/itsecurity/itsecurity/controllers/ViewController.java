@@ -21,8 +21,8 @@ public class ViewController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestParam String userName,
-                        @RequestParam String password,
+    public String login(@RequestParam(defaultValue = "") String userName,
+                        @RequestParam(defaultValue = "") String password,
                         Model model) {
 //        if (repo.findByUserNameAndPassword(userName, password) != null){
 //
@@ -39,15 +39,15 @@ public class ViewController {
     }
 
     @PostMapping("/create")
-    public String register(@RequestParam String userName,
-                           @RequestParam String password,
-                           @RequestParam String equalPassword,
+    public String register(@RequestParam(defaultValue = "") String userName,
+                           @RequestParam(defaultValue = "") String password,
+                           @RequestParam(defaultValue = "") String equalPassword,
                            Model model) {
 
         if(repo.existsByUserName(userName)){
             model.addAttribute("msg", "user already exists");
         } else if (!password.equals(equalPassword)){
-            model.addAttribute("passwordMsg", "password does not match");
+            model.addAttribute("msg", "password does not match");
         } else {
             repo.save(Credentials.builder()
                             .userName(userName)
