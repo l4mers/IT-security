@@ -49,7 +49,6 @@ public class ViewController {
                            @RequestParam String equalPassword,
                            Model model) {
 
-        if(!userName.equals("")){
             if(repo.existsByUserName(userName)){
                 model.addAttribute("msg", "user already exists");
             } else if (!password.equals(equalPassword)){
@@ -61,7 +60,7 @@ public class ViewController {
                         .build());
                 model.addAttribute("msg", "user created");
             }
-        }
+        
         return "create.html";
     }
 }
