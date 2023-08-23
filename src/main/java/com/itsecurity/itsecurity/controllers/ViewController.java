@@ -20,9 +20,14 @@ public class ViewController {
         return "login.html";
     }
 
-    @PostMapping("/login")
-    public String login(@RequestParam(defaultValue = "") String userName,
-                        @RequestParam(defaultValue = "") String password,
+    @RequestMapping("/create")
+    public String createPage() {
+        return "create.html";
+    }
+
+    @PostMapping("/tryLogin")
+    public String login(@RequestParam String userName,
+                        @RequestParam String password,
                         Model model) {
 //        if (repo.findByUserNameAndPassword(userName, password) != null){
 //
@@ -38,22 +43,24 @@ public class ViewController {
         return "login.html";
     }
 
-    @PostMapping("/create")
-    public String register(@RequestParam(defaultValue = "") String userName,
-                           @RequestParam(defaultValue = "") String password,
-                           @RequestParam(defaultValue = "") String equalPassword,
+    @PostMapping("/tryCreate")
+    public String register(@RequestParam String userName,
+                           @RequestParam String password,
+                           @RequestParam String equalPassword,
                            Model model) {
 
-        if(repo.existsByUserName(userName)){
-            model.addAttribute("msg", "user already exists");
-        } else if (!password.equals(equalPassword)){
-            model.addAttribute("msg", "password does not match");
-        } else {
-            repo.save(Credentials.builder()
-                            .userName(userName)
-                            .password(password)
-                    .build());
-            model.addAttribute("msg", "user created");
+        if(!userName.equals("")){
+            if(repo.existsByUserName(userName)){
+                model.addAttribute("msg", "user already exists");
+            } else if (!password.equals(equalPassword)){
+                model.addAttribute("msg", "password does not match");
+            } else {
+                repo.save(Credentials.builder()
+                        .userName(userName)
+                        .password(password)
+                        .build());
+                model.addAttribute("msg", "user created");
+            }
         }
         return "create.html";
     }

@@ -6,13 +6,13 @@
 </head>
 <body>
 <div class="registration">
-    <form action="/create" method="post">
-        <label for="name">Namn:</label><br>
-        <input type="text" id="name" name="name" value=""><br>
+    <form action="/tryCreate" method="post">
+        <label for="userName">Namn:</label><br>
+        <input type="text" id="userName" name="userName" value=""><br>
         <label for="password">Password:</label><br>
         <input type="password" id="password" name="" value=""><br><br>
-        <label for="password2">Password again:</label><br>
-        <input type="password" id="password2" name="" value=""><br><br>
+        <label for="equalPassword">Password again:</label><br>
+        <input type="password" id="equalPassword" name="" value=""><br><br>
         <input type="submit" value="Registrera">
         <p th:text="${msg}"></p>
     </form>
