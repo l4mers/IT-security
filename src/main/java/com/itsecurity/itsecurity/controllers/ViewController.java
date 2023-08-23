@@ -17,12 +17,12 @@ public class ViewController {
 
     @RequestMapping("/index")
     public String showMyPage() {
-        return "login.html";
+        return "welcome";
     }
 
     @RequestMapping("/create")
     public String createPage() {
-        return "create.html";
+        return "create";
     }
 
     @PostMapping("/tryLogin")
@@ -38,9 +38,9 @@ public class ViewController {
         } else if (!credentials.getPassword().equals(password)){
             model.addAttribute("msg", "wrong password");
         } else {
-            return "welcome.html";
+            return "welcome";
         }
-        return "login.html";
+        return "login";
     }
 
     @PostMapping("/tryCreate")
@@ -61,6 +61,6 @@ public class ViewController {
                 model.addAttribute("msg", "user created");
             }
         
-        return "create.html";
+        return "create";
     }
 }
