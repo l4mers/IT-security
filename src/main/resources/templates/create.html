@@ -14,7 +14,10 @@
         <label for="equalPassword">Password again:</label><br>
         <input type="text" id="equalPassword" name="equalPassword" value=""><br><br>
         <input type="submit" value="Registrera">
-        <p th:text="${msg}"></p>
+        <p th:text="${msg}"></p><br>
+    </form>
+    <form action="/index" method="post">
+        <input type="submit" value="login">
     </form>
 </div>
 </body>

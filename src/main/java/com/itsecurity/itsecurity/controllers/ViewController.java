@@ -17,7 +17,7 @@ public class ViewController {
 
     @RequestMapping("/index")
     public String showMyPage() {
-        return "welcome";
+        return "login";
     }
 
     @RequestMapping("/create")
