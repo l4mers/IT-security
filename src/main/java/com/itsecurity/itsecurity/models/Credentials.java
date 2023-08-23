@@ -21,15 +21,4 @@ public class Credentials {
 
     private String userName;
     private String password;
-    private Date created;
-    private Date updated;
-
-    @PrePersist
-    protected void onCreate() {
-        created = new Date();
-    }
-    @PreUpdate
-    protected void onUpdate() {
-        updated = new Date();
-    }
 }

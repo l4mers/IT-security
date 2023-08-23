@@ -49,7 +49,10 @@ public class ViewController {
         } else if (!password.equals(equalPassword)){
             model.addAttribute("passwordMsg", "password does not match");
         } else {
-            model.addAttribute("passwordMsg", "password does not match");
+            repo.save(Credentials.builder()
+                            .userName(userName)
+                            .password(password)
+                    .build());
         }
         return "create.html";
     }
