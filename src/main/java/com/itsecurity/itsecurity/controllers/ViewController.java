@@ -1,6 +1,6 @@
 package com.itsecurity.itsecurity.controllers;
 
-import com.itsecurity.itsecurity.models.Credentials;
+import com.itsecurity.itsecurity.authentication.CredentialService;
 import com.itsecurity.itsecurity.repositories.CredentialsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequiredArgsConstructor
 public class ViewController {
 
-    public final CredentialsRepository repo;
+    private final CredentialsRepository repo;
+    private final CredentialService service;
 
     @RequestMapping("/index")
     public String showMyPage() {
@@ -31,21 +32,21 @@ public class ViewController {
                         Model model) {
 
         //Lösning
-//        if (repo.findByUserNameAndPassword(userName, password)){
-//              model.addAttribute("msg", "wrong credentials combination");
-//        } else {
-//            return "welcome";
-//        }
-
-
-        Credentials credentials = repo.findByUserName(userName);
-        if(credentials == null){
-            model.addAttribute("msg", "user does not exist");
-        } else if (!credentials.getPassword().equals(password)){
-            model.addAttribute("msg", "wrong password");
+        if (service.authenticate(userName, password)){
+              model.addAttribute("msg", "wrong credential combination");
         } else {
             return "welcome";
         }
+
+
+//        Credentials credentials = repo.findByUserName(userName);
+//        if(credentials == null){
+//            model.addAttribute("msg", "user does not exist");
+//        } else if (!credentials.getPassword().equals(password)){
+//            model.addAttribute("msg", "wrong password");
+//        } else {
+//            return "welcome";
+//        }
         return "login";
     }
 
@@ -61,10 +62,13 @@ public class ViewController {
             } else if (!password.equals(equalPassword)){
                 model.addAttribute("msg", "password does not match");
             } else {
-                repo.save(Credentials.builder()
-                        .userName(userName)
-                        .password(password)
-                        .build());
+//                repo.save(Credentials.builder()
+//                        .userName(userName)
+//                        .password(password)
+//                        .build());
+
+                service.register(userName, password);
+
                 model.addAttribute("msg", "user created");
             }
 
