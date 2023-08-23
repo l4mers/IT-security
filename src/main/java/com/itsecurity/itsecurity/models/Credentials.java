@@ -14,11 +14,9 @@ import java.util.Date;
 @Data
 @Builder
 public class Credentials {
-
     @Id
     @GeneratedValue
     private Long id;
-
     private String userName;
     private String password;
 }

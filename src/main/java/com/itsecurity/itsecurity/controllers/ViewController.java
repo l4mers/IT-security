@@ -29,9 +29,15 @@ public class ViewController {
     public String login(@RequestParam String userName,
                         @RequestParam String password,
                         Model model) {
-//        if (repo.findByUserNameAndPassword(userName, password) != null){
-//
+
+        //Lösning
+//        if (repo.findByUserNameAndPassword(userName, password)){
+//              model.addAttribute("msg", "wrong credentials combination");
+//        } else {
+//            return "welcome";
 //        }
+
+
         Credentials credentials = repo.findByUserName(userName);
         if(credentials == null){
             model.addAttribute("msg", "user does not exist");
@@ -51,6 +57,7 @@ public class ViewController {
 
             if(repo.existsByUserName(userName)){
                 model.addAttribute("msg", "user already exists");
+                //model.addAttribute("msg", "bad user name");
             } else if (!password.equals(equalPassword)){
                 model.addAttribute("msg", "password does not match");
             } else {
@@ -60,6 +67,7 @@ public class ViewController {
                         .build());
                 model.addAttribute("msg", "user created");
             }
+
         
         return "create";
     }
