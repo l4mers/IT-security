@@ -32,7 +32,7 @@ public class ViewController {
                         Model model) {
 
         //Lösning
-        if (service.authenticate(userName, password)){
+        if (!service.authenticate(userName, password)){
               model.addAttribute("msg", "wrong credential combination");
         } else {
             return "welcome";
