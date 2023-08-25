@@ -29,7 +29,7 @@ public class CredentialService {
     public boolean authenticate(String userName, String password){
         Credentials cred = repo.findByUserName(userName);
         if (cred == null){
-            return false;
-        } else return passwordEncoder.matches(password, cred.getPassword());
+            return true;
+        } else return !passwordEncoder.matches(password, cred.getPassword());
     }
 }

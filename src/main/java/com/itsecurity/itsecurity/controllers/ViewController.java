@@ -31,23 +31,16 @@ public class ViewController {
                         @RequestParam String password,
                         Model model) {
 
-<<<<<<< HEAD
-        if(userName.length() < 1 || password.length() < 1){
+        if(userName.length() < 1 || password.length() < 1) {
             model.addAttribute("msg", "all fields required");
-=======
-        //Lösning
-        if (!service.authenticate(userName, password)){
-              model.addAttribute("msg", "wrong credential combination");
->>>>>>> fc2d47bdf056dcbd640cc8eec635e8f82793c6df
+
         } else {
             //Lösning
-            if (!service.authenticate(userName, password)){
+            if (service.authenticate(userName, password)){
                 model.addAttribute("msg", "wrong credential combination");
             } else {
                 return "welcome";
             }
-
-
 //        Credentials credentials = repo.findByUserName(userName);
 //        if(credentials == null){
 //            model.addAttribute("msg", "user does not exist");
@@ -57,8 +50,6 @@ public class ViewController {
 //            return "welcome";
 //        }
         }
-
-
         return "login";
     }
 
@@ -72,24 +63,17 @@ public class ViewController {
             model.addAttribute("msg", "all fields required");
         } else {
 
-            if (repo.existsByUserName(userName)) {
-                model.addAttribute("msg", "user already exists");
-                //model.addAttribute("msg", "invalid user name");
-            } else if (!password.equals(equalPassword)) {
+            if (!password.equals(equalPassword)) {
                 model.addAttribute("msg", "password does not match");
-            } else {
-//                repo.save(Credentials.builder()
-//                        .userName(userName)
-//                        .password(password)
-//                        .build());
-
-                service.register(userName, password);
-
+            }
+            else if (service.register(userName, password)) {
                 model.addAttribute("msg", "user created");
             }
+            else {
+                //model.addAttribute("msg", "user already exists");
+                model.addAttribute("msg", "invalid user name");
+            }
         }
-
-        
         return "create";
     }
 }
