@@ -33,6 +33,11 @@ public class ViewController {
 
         if(userName.length() < 1 || password.length() < 1){
             model.addAttribute("msg", "all fields required");
+=======
+        //Lösning
+        if (!service.authenticate(userName, password)){
+              model.addAttribute("msg", "wrong credential combination");
+>>>>>>> fc2d47bdf056dcbd640cc8eec635e8f82793c6df
         } else {
             //Lösning
             if (!service.authenticate(userName, password)){
