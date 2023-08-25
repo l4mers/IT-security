@@ -27,6 +27,9 @@ public class CredentialService {
     }
 
     public boolean authenticate(String userName, String password){
-        return repo.existsByUserNameAndPassword(userName, passwordEncoder.encode(password));
+        Credentials cred = repo.findByUserName(userName);
+        if (cred == null){
+            return false;
+        } else return passwordEncoder.matches(password, cred.getPassword());
     }
 }

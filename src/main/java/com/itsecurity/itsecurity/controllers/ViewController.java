@@ -31,12 +31,15 @@ public class ViewController {
                         @RequestParam String password,
                         Model model) {
 
-        //Lösning
-        if (service.authenticate(userName, password)){
-              model.addAttribute("msg", "wrong credential combination");
+        if(userName.length() < 1 || password.length() < 1){
+            model.addAttribute("msg", "all fields required");
         } else {
-            return "welcome";
-        }
+            //Lösning
+            if (!service.authenticate(userName, password)){
+                model.addAttribute("msg", "wrong credential combination");
+            } else {
+                return "welcome";
+            }
 
 
 //        Credentials credentials = repo.findByUserName(userName);
@@ -47,6 +50,9 @@ public class ViewController {
 //        } else {
 //            return "welcome";
 //        }
+        }
+
+
         return "login";
     }
 
@@ -56,10 +62,14 @@ public class ViewController {
                            @RequestParam String equalPassword,
                            Model model) {
 
-            if(repo.existsByUserName(userName)){
+        if(userName.length() < 1 || password.length() < 1 || equalPassword.length() < 1){
+            model.addAttribute("msg", "all fields required");
+        } else {
+
+            if (repo.existsByUserName(userName)) {
                 model.addAttribute("msg", "user already exists");
-                //model.addAttribute("msg", "bad user name");
-            } else if (!password.equals(equalPassword)){
+                //model.addAttribute("msg", "invalid user name");
+            } else if (!password.equals(equalPassword)) {
                 model.addAttribute("msg", "password does not match");
             } else {
 //                repo.save(Credentials.builder()
@@ -71,6 +81,7 @@ public class ViewController {
 
                 model.addAttribute("msg", "user created");
             }
+        }
 
         
         return "create";
