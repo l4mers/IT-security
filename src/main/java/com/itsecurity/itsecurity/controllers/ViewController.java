@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequiredArgsConstructor
 public class ViewController {
 
-    private final CredentialsRepository repo;
+    //private final CredentialsRepository repo;
     private final CredentialService service;
 
     @RequestMapping("/index")
