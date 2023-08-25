@@ -31,6 +31,7 @@ public class ViewController {
                         @RequestParam String password,
                         Model model) {
 
+<<<<<<< HEAD
         if(userName.length() < 1 || password.length() < 1){
             model.addAttribute("msg", "all fields required");
 =======
