@@ -1,6 +1,7 @@
 package com.itsecurity.itsecurity.controllers;
 
 import com.itsecurity.itsecurity.authentication.CredentialService;
+import com.itsecurity.itsecurity.models.Credentials;
 import com.itsecurity.itsecurity.repositories.CredentialsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequiredArgsConstructor
 public class ViewController {
 
-    //private final CredentialsRepository repo;
+    private final CredentialsRepository repo;
     private final CredentialService service;
 
     @RequestMapping("/index")
@@ -63,6 +64,22 @@ public class ViewController {
             model.addAttribute("msg", "all fields required");
         } else {
 
+//            if (!password.equals(equalPassword)) {
+//                model.addAttribute("msg", "password does not match");
+//            }
+//            else if (repo.existsByUserName(userName)) {
+//                model.addAttribute("msg", "user already exists");
+//            }
+//            else {
+//                model.addAttribute("msg", "user created");
+//
+//                repo.save(Credentials.builder()
+//                                .userName(userName)
+//                                .password(password)
+//                        .build());
+//            }
+
+            //Lösning
             if (!password.equals(equalPassword)) {
                 model.addAttribute("msg", "password does not match");
             }
@@ -70,7 +87,6 @@ public class ViewController {
                 model.addAttribute("msg", "user created");
             }
             else {
-                //model.addAttribute("msg", "user already exists");
                 model.addAttribute("msg", "invalid user name");
             }
         }
